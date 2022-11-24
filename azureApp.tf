@@ -13,22 +13,22 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "exampleRG1"
-  location = "West Europe"
+resource "azurerm_resource_group" "priya" {
+  name     = "terraform"
+  location = "East US"
 }
 
-resource "azurerm_virtual_network" "example" {
-  name                = "example-vnet"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_virtual_network" "priya" {
+  name                = "priya-vnet"
+  location            = azurerm_resource_group.priya.location
+  resource_group_name = azurerm_resource_group.priya.name
   address_space       = ["10.0.0.0/16"]
 }
 
-resource "azurerm_subnet" "example" {
-  name                 = "example-subnet"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+resource "azurerm_subnet" "priya" {
+  name                 = "priya-subnet"
+  resource_group_name  = azurerm_resource_group.priya.name
+  virtual_network_name = azurerm_virtual_network.priya.name
   address_prefixes     = ["10.0.2.0/24"]
 
   delegation {
@@ -40,10 +40,10 @@ resource "azurerm_subnet" "example" {
   }
 }
 
-resource "azurerm_app_service_environment_v3" "example" {
-  name                = "example-asev3"
-  resource_group_name = azurerm_resource_group.example.name
-  subnet_id           = azurerm_subnet.example.id
+resource "azurerm_app_service_environment_v3" "priya" {
+  name                = "priya-asev3"
+  resource_group_name = azurerm_resource_group.priya.name
+  subnet_id           = azurerm_subnet.priya.id
 
   internal_load_balancing_mode = "Web, Publishing"
 
